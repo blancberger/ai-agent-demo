@@ -1,0 +1,121 @@
+{
+  "name": "github-stats-api",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "3cf74014-123f-465b-9ec7-bac67b81550b",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5f858456-5d31-4167-b456-1a6506df5369",
+      "name": "Webhook",
+      "webhookId": "3cf74014-123f-465b-9ec7-bac67b81550b"
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/users/blancberger",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n-demo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "afb157c9-3f09-4526-8f00-7d5a792a99c3",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"user\": {\n    \"username\": \"{{ $json.login }}\",\n    \"display_name\": \"{{ $json.name }}\",\n    \"stats\": {\n      \"public_repos\": \"{{ $json.public_repos }}\",\n      \"followers\": \"{{ $json.followers }}\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "82d57a30-8298-442f-b94f-29089c655c3f",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko/20100101 Firefox/144.0",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "accept-language": "el-GR,el;q=0.8,en-US;q=0.5,en;q=0.3",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "connection": "keep-alive",
+            "cookie": "ajs_anonymous_id=f8ce4f5f-7c6d-4bbc-8aa4-cdebf7501ebf; testcookie=; am_username=; am_check=; memarketing-_zldp=InAUKvYV4QcDIl5VhtDQle2jozSvO88mPa%2FDUNnPZ%2BjRBIHZ4H%2BeGLzKDJJuRUF0gcaMIVLT%2Bwo%3D; _streamlit_xsrf=2|07cf53a0|674378a8661e6e4aa8a9991a06177346|1761943602; JSESSIONID_APM_9090=799FE26F34B82B70E0FD59C9893268E3; csrfToken=917006cee707e2e9ef821531ea9880cae1eb545ea328e1f560c00a4af3de190713f9d5cadd073f73e8376bdcba515cca64dbf45fb81f126007cdb08aedcc58fd; _zcsr_tmp=917006cee707e2e9ef821531ea9880cae1eb545ea328e1f560c00a4af3de190713f9d5cadd073f73e8376bdcba515cca64dbf45fb81f126007cdb08aedcc58fd; rl_session=RudderEncrypt%3AU2FsdGVkX19wARheTVMGJILGXJ2loUQzKYqKJ19HPGsLCvUVHSklNP%2FBSAw%2B0Txm8iKSvyyG9oxA32tIEgwqTSLevr65EoAKGyS8ydmjA0U5j%2BKK%2BGOkvv4RdU0Ws4lYUxpoXNdiM6rsSa10xZdRsA%3D%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BbQPAxn3Pn28TIQw6MbdWSoXBbnbASNaHDWCW6CsOPlPCMXNcJG6Z%2BeySH9CuM4XJFznJAOkWPCA%3D%3D; rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19dPxARMst8ehz7k8f%2FscPVTRdCXugHgaU%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2BbVakAnFzVKR8hluQGs5%2B%2BmzYDk0phlJc%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2FK0gM3xNPuNGQypKCqlsMtUilDQZt9Kv86LSuo98KrjaR9%2Fn6797GzbFPkL4ZiU2UOi5dw7uiuSz5YzYXL2PsDmSwz8yJYVlBlRJudei1YFngvJBKYPlDPrSEbz44vaMtQZG6qk1VCdesas91Q8WoPvIFXYDlp7nQ%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX18%2Bfp0B1BUrpfqo7YXsRaP%2Bc7VS9%2BGHMUlb1Dk7BlfRk%2FEu3XzswImRGI3g3WrRBkxvo58w%2FxKAyBP3P3xbgfKgDtVXDpRr%2F6XdDqQSfSC4JrhDar35ihkW4gDgfRF7Ugpv5s7FWjCozQk93upGBNTkJ%2B%2BX5jjqAI4%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%22538bdc89e96fcdbbd80c6cf8ad9efa88fa616e6ab4ab9ce84cf427425e14b794%237167491d-199f-4301-aba2-b6b265aadf58%22%2C%22%24sesid%22%3A%5B1763104792862%2C%22019a812b-06da-7c3c-b90e-266ba4e74da1%22%2C1763103672023%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22http%3A%2F%2Flocalhost%3A5678%2Fhome%2Fworkflows%22%7D%7D",
+            "upgrade-insecure-requests": "1",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "priority": "u=0, i"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "http://localhost:5678/webhook-test/3cf74014-123f-465b-9ec7-bac67b81550b",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9aab51db-273c-404a-bfcd-56659cb6949f",
+  "meta": {
+    "instanceId": "538bdc89e96fcdbbd80c6cf8ad9efa88fa616e6ab4ab9ce84cf427425e14b794"
+  },
+  "id": "5sv9VdeBwlhnr02t",
+  "tags": []
+}
